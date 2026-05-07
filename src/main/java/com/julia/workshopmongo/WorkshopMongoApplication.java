@@ -1,13 +1,13 @@
-package com.julia.worshopmongo;
+package com.julia.workshopmongo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WorshopMongoApplication {
+public class WorkshopMongoApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(WorshopMongoApplication.class, args);
+        SpringApplication.run(WorkshopMongoApplication.class, args);
     }
 
 }

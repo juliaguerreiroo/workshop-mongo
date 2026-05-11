@@ -1,5 +1,6 @@
 package com.julia.workshopmongo.resources;
 
+import com.julia.workshopmongo.domain.Post;
 import com.julia.workshopmongo.domain.User;
 import com.julia.workshopmongo.dto.UserDTO;
 import com.julia.workshopmongo.repository.UserRepository;
@@ -41,5 +42,25 @@ public class UserResource {
         service.insert(user);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable String id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Void> update(@RequestBody UserDTO dto, @PathVariable String id) {
+        User obj = service.fromDTO(dto);
+        obj.setId(id);
+        service.update(obj);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+        User user =  service.findById(id);
+        return ResponseEntity.ok().body(user.getPosts());
     }
 }
